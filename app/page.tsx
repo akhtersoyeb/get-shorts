@@ -1,8 +1,7 @@
-import { buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { UserButton, auth, currentUser } from "@clerk/nextjs"
+import { auth, currentUser } from "@clerk/nextjs"
 import { Metadata } from "next"
-import Link from "next/link"
+import DashboardPage from "./dashboard"
+import LandingPage from "./landing"
 
 export const metadata: Metadata = {
   title: "Get Shorts | Home",
@@ -16,38 +15,8 @@ export default async function HomePage() {
   // Use `user` to render user details or create UI elements
 
   if (userId) {
-    return <DashboardPageUI />
+    return <DashboardPage />
   }
 
-  return <LandingPageUI />
-}
-
-function DashboardPageUI() {
-  return (
-    <div className="h-screen flex flex-col items-center justify-center space-y-10">
-      <UserButton afterSignOutUrl="/" />
-      <p>Dashboard Page</p>
-    </div>
-  )
-}
-
-function LandingPageUI() {
-  return (
-    <>
-      <div className="h-screen flex flex-col items-center justify-center space-y-10">
-        <h1 className="font-medium text-5xl">
-          Welcome to
-          <span className="font-bold italic">
-            Get Shorts
-          </span>
-        </h1>
-        <Link
-          href={'/sign-in'}
-          className={cn(buttonVariants({ variant: "default" }))}
-        >
-          Get Started
-        </Link>
-      </div>
-    </>
-  )
+  return <LandingPage />
 }
